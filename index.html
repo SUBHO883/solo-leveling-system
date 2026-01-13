@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Leveling: Daily Task System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-crown"></i> SOLO LEVELING: DAILY TASK SYSTEM</h1>
+            <p class="system-tagline">Complete your tasks to level up. Fail and face punishment.</p>
+        </header>
+        
+        <div class="dashboard">
+            <div class="panel">
+                <div class="panel-title">
+                    <i class="fas fa-tasks"></i> Daily Tasks
+                </div>
+                
+                <div class="task-system">
+                    <div class="task-category">
+                        <div class="task-category-title">
+                            <i class="fas fa-dumbbell"></i> Fitness Tasks
+                        </div>
+                        <div class="task-list" id="fitness-tasks">
+                        </div>
+                    </div>
+                    
+                    <div class="task-category">
+                        <div class="task-category-title">
+                            <i class="fas fa-brain"></i> Mental Tasks
+                        </div>
+                        <div class="task-list" id="mental-tasks">
+                        </div>
+                    </div>
+                    
+                    <div class="task-category">
+                        <div class="task-category-title">
+                            <i class="fas fa-utensils"></i> Nutrition Tasks
+                        </div>
+                        <div class="task-list" id="nutrition-tasks">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-title">
+                    <i class="fas fa-user-circle"></i> Player Stats
+                </div>
+                
+                <div class="player-stats">
+                    <div class="stat-card">
+                        <div class="stat-label">Level</div>
+                        <div class="stat-value" id="player-level">12</div>
+                        <div class="stat-level level-intermediate">INTERMEDIATE</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Experience</div>
+                        <div class="stat-value" id="player-xp">2,850</div>
+                        <div class="stat-label">Next: <span id="next-level-xp">3,500</span></div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Stamina</div>
+                        <div class="stat-value" id="player-stamina">78%</div>
+                        <div class="stat-level level-advanced">HIGH</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Age</div>
+                        <div class="stat-value" id="player-age">26</div>
+                        <div class="stat-label">Years</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Height</div>
+                        <div class="stat-value" id="player-height">5'11"</div>
+                        <div class="stat-label">180 cm</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Weight</div>
+                        <div class="stat-value" id="player-weight">165</div>
+                        <div class="stat-label">lbs / 75 kg</div>
+                    </div>
+                </div>
+                
+                <div class="panel-title" style="margin-top: 30px;">
+                    <i class="fas fa-chart-line"></i> Fitness Progress
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <i class="fas fa-running"></i> Stamina
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="stamina-bar" style="width: 78%; background: linear-gradient(90deg, var(--success), #10b981);"></div>
+                        </div>
+                        <div class="progress-value" id="stamina-value">78%</div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <i class="fas fa-weight"></i> Strength
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="strength-bar" style="width: 65%; background: linear-gradient(90deg, var(--accent), #3b82f6);"></div>
+                        </div>
+                        <div class="progress-value" id="strength-value">65%</div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <i class="fas fa-heart"></i> Health
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="health-bar" style="width: 82%; background: linear-gradient(90deg, var(--danger), #ef4444);"></div>
+                        </div>
+                        <div class="progress-value" id="health-value">82%</div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <i class="fas fa-bullseye"></i> Target Completion
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="target-bar" style="width: 40%; background: linear-gradient(90deg, var(--warning), #f59e0b);"></div>
+                        </div>
+                        <div class="progress-value" id="target-value">4/10</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions-panel">
+            <button class="action-btn action-submit" id="submit-tasks">
+                <i class="fas fa-paper-plane"></i>
+                <span>Submit Completed Tasks</span>
+            </button>
+            
+            <button class="action-btn action-reset" id="reset-day">
+                <i class="fas fa-redo"></i>
+                <span>Reset Day & Start Fresh</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <div class="notification-title" id="notification-title">Task Completed!</div>
+        <div class="notification-message" id="notification-message">You gained 50 XP.</div>
+    </div>
+    
+    <div class="level-up-animation" id="level-up-animation">
+        <div class="level-up-content">
+            <h2>LEVEL UP!</h2>
+            <p>Congratulations! You've reached level <span id="new-level">13</span></p>
+            
+            <div class="level-up-stats">
+                <div class="level-up-stat">
+                    <div>+5 Stamina</div>
+                    <div class="stat-label">Increased</div>
+                </div>
+                <div class="level-up-stat">
+                    <div>+3 Strength</div>
+                    <div class="stat-label">Improved</div>
+                </div>
+                <div class="level-up-stat">
+                    <div>+2 Health</div>
+                    <div class="stat-label">Enhanced</div>
+                </div>
+                <div class="level-up-stat">
+                    <div>New Ability</div>
+                    <div class="stat-label">Unlocked</div>
+                </div>
+            </div>
+            
+            <button id="close-level-up" class="action-btn action-submit" style="margin-top: 20px; width: 100%;">
+                Continue Journey
+            </button>
+        </div>
+    </div>
+    
+    <div class="punishment-animation" id="punishment-animation">
+        <div class="punishment-content">
+            <h2><i class="fas fa-exclamation-triangle"></i> PUNISHMENT!</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 25px;">You failed to complete your daily tasks.</p>
+            
+            <div style="text-align: left; margin: 25px 0;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <i class="fas fa-arrow-down" style="color: var(--danger);"></i>
+                    <span>Stamina decreased by 15%</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <i class="fas fa-arrow-down" style="color: var(--danger);"></i>
+                    <span>Strength decreased by 10%</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <i class="fas fa-ban" style="color: var(--danger);"></i>
+                    <span>XP gain reduced for tomorrow</span>
+                </div>
+            </div>
+            
+            <p style="color: var(--text-dim); font-style: italic; margin-top: 20px;">
+                "Discipline is the bridge between goals and accomplishment."
+            </p>
+            
+            <button id="accept-punishment" class="action-btn" style="margin-top: 25px; width: 100%; background: var(--danger);">
+                Accept Consequences
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Game State
+        const gameState = {
+            level: 12,
+            xp: 2850,
+            nextLevelXp: 3500,
+            stamina: 78,
+            strength: 65,
+            health: 82,
+            age: 26,
+            height: "5'11\"",
+            weight: 165,
+            completedTasks: 0,
+            totalTasks: 10,
+            dailyCompleted: 0
+        };
+        
+        // Daily Tasks Data
+        const dailyTasks = {
+            fitness: [
+                { id: 1, title: "Morning Run (30 min)", description: "Complete a 30-minute run", reward: 75, completed: false, category: "fitness" },
+                { id: 2, title: "Push-ups (100 reps)", description: "Complete 100 push-ups throughout the day", reward: 50, completed: false, category: "fitness" },
+                { id: 3, title: "Strength Training", description: "1 hour of weight training", reward: 100, completed: false, category: "fitness" },
+                { id: 4, title: "Stretching Session", description: "15 minutes of full body stretching", reward: 30, completed: false, category: "fitness" }
+            ],
+            mental: [
+                { id: 5, title: "Meditation (20 min)", description: "Meditate for 20 minutes", reward: 40, completed: false, category: "mental" },
+                { id: 6, title: "Read 50 Pages", description: "Read a book for personal growth", reward: 60, completed: false, category: "mental" },
+                { id: 7, title: "Learn New Skill", description: "Spend 1 hour learning something new", reward: 80, completed: false, category: "mental" }
+            ],
+            nutrition: [
+                { id: 8, title: "Drink 3L Water", description: "Stay hydrated throughout the day", reward: 30, completed: false, category: "nutrition" },
+                { id: 9, title: "Eat Balanced Meals", description: "3 balanced meals with protein", reward: 50, completed: false, category: "nutrition" },
+                { id: 10, title: "No Junk Food", description: "Avoid processed and junk food", reward: 40, completed: false, category: "nutrition" }
+            ]
+        };
+        
+        // DOM Elements
+        const playerLevelElement = document.getElementById('player-level');
+        const playerXpElement = document.getElementById('player-xp');
+        const nextLevelXpElement = document.getElementById('next-level-xp');
+        const playerStaminaElement = document.getElementById('player-stamina');
+        const playerAgeElement = document.getElementById('player-age');
+        const playerHeightElement = document.getElementById('player-height');
+        const playerWeightElement = document.getElementById('player-weight');
+        
+        const staminaBarElement = document.getElementById('stamina-bar');
+        const staminaValueElement = document.getElementById('stamina-value');
+        const strengthBarElement = document.getElementById('strength-bar');
+        const strengthValueElement = document.getElementById('strength-value');
+        const healthBarElement = document.getElementById('health-bar');
+        const healthValueElement = document.getElementById('health-value');
+        const targetBarElement = document.getElementById('target-bar');
+        const targetValueElement = document.getElementById('target-value');
+        
+        const fitnessTasksContainer = document.getElementById('fitness-tasks');
+        const mentalTasksContainer = document.getElementById('mental-tasks');
+        const nutritionTasksContainer = document.getElementById('nutrition-tasks');
+        
+        const notificationElement = document.getElementById('notification');
+        const notificationTitleElement = document.getElementById('notification-title');
+        const notificationMessageElement = document.getElementById('notification-message');
+        
+        const levelUpAnimationElement = document.getElementById('level-up-animation');
+        const newLevelElement = document.getElementById('new-level');
+        const closeLevelUpButton = document.getElementById('close-level-up');
+        
+        const punishmentAnimationElement = document.getElementById('punishment-animation');
+        const acceptPunishmentButton = document.getElementById('accept-punishment');
+        
+        const submitTasksButton = document.getElementById('submit-tasks');
+        const resetDayButton = document.getElementById('reset-day');
+        
+        // Initialize the game
+        function initGame() {
+            updateStatsDisplay();
+            renderTasks();
+            loadSavedProgress();
+        }
+        
+        // Update all stats display
+        function updateStatsDisplay() {
+            playerLevelElement.textContent = gameState.level;
+            playerXpElement.textContent = gameState.xp.toLocaleString();
+            nextLevelXpElement.textContent = gameState.nextLevelXp.toLocaleString();
+            playerStaminaElement.textContent = `${gameState.stamina}%`;
+            playerAgeElement.textContent = gameState.age;
+            playerHeightElement.textContent = gameState.height;
+            playerWeightElement.textContent = gameState.weight;
+            
+            // Update progress bars
+            staminaBarElement.style.width = `${gameState.stamina}%`;
+            staminaValueElement.textContent = `${gameState.stamina}%`;
+            
+            strengthBarElement.style.width = `${gameState.strength}%`;
+            strengthValueElement.textContent = `${gameState.strength}%`;
+            
+            healthBarElement.style.width = `${gameState.health}%`;
+            healthValueElement.textContent = `${gameState.health}%`;
+            
+            // Update target completion
+            const completionPercentage = (gameState.completedTasks / gameState.totalTasks) * 100;
+            targetBarElement.style.width = `${completionPercentage}%`;
+            targetValueElement.textContent = `${gameState.completedTasks}/${gameState.totalTasks}`;
+        }
+        
+        // Render all tasks
+        function renderTasks() {
+            renderTaskCategory(dailyTasks.fitness, fitnessTasksContainer);
+            renderTaskCategory(dailyTasks.mental, mentalTasksContainer);
+            renderTaskCategory(dailyTasks.nutrition, nutritionTasksContainer);
+            
+            // Update completed tasks count
+            gameState.completedTasks = countCompletedTasks();
+            updateStatsDisplay();
+        }
+        
+        // Render tasks for a specific category
+        function renderTaskCategory(tasks, container) {
+            container.innerHTML = '';
+            
+            tasks.forEach(task => {
+                const taskElement = document.createElement('div');
+                taskElement.className = `task-item ${task.completed ? 'completed' : ''}`;
+                taskElement.dataset.id = task.id;
+                taskElement.dataset.category = task.category;
+                
+                taskElement.innerHTML = `
+                    <div class="task-checkbox ${task.completed ? 'completed' : ''}" data-id="${task.id}">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="task-content">
+                        <div class="task-title">${task.title}</div>
+                        <div class="task-desc">${task.description}</div>
+                    </div>
+                    <div class="task-reward">+${task.reward} XP</div>
+                `;
+                
+                container.appendChild(taskElement);
+                
+                // Add click event to checkbox
+                const checkbox = taskElement.querySelector('.task-checkbox');
+                checkbox.addEventListener('click', () => toggleTaskCompletion(task.id));
+            });
+        }
+        
+        // Count completed tasks
+        function countCompletedTasks() {
+            let count = 0;
+            
+            for (const category in dailyTasks) {
+                count += dailyTasks[category].filter(task => task.completed).length;
+            }
+            
+            return count;
+        }
+        
+        // Toggle task completion
+        function toggleTaskCompletion(taskId) {
+            let taskFound = false;
+            
+            // Search for task in all categories
+            for (const category in dailyTasks) {
+                const task = dailyTasks[category].find(t => t.id === taskId);
+                if (task) {
+                    task.completed = !task.completed;
+                    taskFound = true;
+                    
+                    // Update UI
+                    const taskElement = document.querySelector(`.task-item[data-id="${taskId}"]`);
+                    const checkbox = document.querySelector(`.task-checkbox[data-id="${taskId}"]`);
+                    
+                    if (task.completed) {
+                        taskElement.classList.add('completed');
+                        checkbox.classList.add('completed');
+                        gameState.dailyCompleted++;
+                        
+                        showNotification("Task Completed", `You completed: ${task.title}`);
+                    } else {
+                        taskElement.classList.remove('completed');
+                        checkbox.classList.remove('completed');
+                        gameState.dailyCompleted--;
+                    }
+                    
+                    break;
+                }
+            }
+            
+            if (taskFound) {
+                gameState.completedTasks = countCompletedTasks();
+                updateStatsDisplay();
+                saveProgress();
+            }
+        }
+        
+        // Submit completed tasks for the day
+        function submitDailyTasks() {
+            const completedCount = gameState.completedTasks;
+            const totalTasks = gameState.totalTasks;
+            
+            // Check if all tasks are completed
+            if (completedCount === totalTasks) {
+                // All tasks completed - REWARD
+                const xpGained = calculateXpReward();
+                gameState.xp += xpGained;
+                
+                // Increase stats
+                gameState.stamina = Math.min(100, gameState.stamina + 5);
+                gameState.strength = Math.min(100, gameState.strength + 3);
+                gameState.health = Math.min(100, gameState.health + 2);
+                
+                showNotification("Perfect Day!", `All tasks completed! +${xpGained} XP gained.`);
+                
+                // Check for level up
+                checkLevelUp();
+            } else if (completedCount >= totalTasks * 0.7) {
+                // Most tasks completed - Partial reward
+                const xpGained = Math.floor(calculateXpReward() * 0.7);
+                gameState.xp += xpGained;
+                
+                // Small stat increase
+                gameState.stamina = Math.min(100, gameState.stamina + 2);
+                gameState.strength = Math.min(100, gameState.strength + 1);
+                
+                showNotification("Good Work", `${completedCount}/${totalTasks} tasks completed. +${xpGained} XP gained.`);
+                
+                checkLevelUp();
+            } else if (completedCount >= totalTasks * 0.5) {
+                // Half tasks completed - Small reward
+                const xpGained = Math.floor(calculateXpReward() * 0.4);
+                gameState.xp += xpGained;
+                
+                showNotification("Keep Trying", `${completedCount}/${totalTasks} tasks completed. +${xpGained} XP gained.`);
+            } else {
+                // Less than half completed - PUNISHMENT
+                showPunishment();
+                return; // Don't reset tasks yet
+            }
+            
+            // Reset tasks for next day
+            resetTasksForNewDay();
+            updateStatsDisplay();
+            saveProgress();
+        }
+        
+        // Calculate XP reward based on completed tasks
+        function calculateXpReward() {
+            let total = 0;
+            
+            for (const category in dailyTasks) {
+                dailyTasks[category].forEach(task => {
+                    if (task.completed) {
+                        total += task.reward;
+                    }
+                });
+            }
+            
+            return total;
+        }
+        
+        // Check if player should level up
+        function checkLevelUp() {
+            if (gameState.xp >= gameState.nextLevelXp) {
+                // Level up!
+                gameState.level++;
+                gameState.xp -= gameState.nextLevelXp;
+                gameState.nextLevelXp = Math.floor(gameState.nextLevelXp * 1.5);
+                
+                // Show level up animation
+                newLevelElement.textContent = gameState.level;
+                showLevelUp();
+            }
+        }
+        
+        // Show punishment for failing tasks
+        function showPunishment() {
+            punishmentAnimationElement.classList.add('show');
+            
+            // Apply punishment stats
+            gameState.stamina = Math.max(0, gameState.stamina - 15);
+            gameState.strength = Math.max(0, gameState.strength - 10);
+            gameState.health = Math.max(0, gameState.health - 5);
+            
+            updateStatsDisplay();
+        }
+        
+        // Reset tasks for a new day
+        function resetTasksForNewDay() {
+            for (const category in dailyTasks) {
+                dailyTasks[category].forEach(task => {
+                    task.completed = false;
+                });
+            }
+            
+            gameState.completedTasks = 0;
+            gameState.dailyCompleted = 0;
+            renderTasks();
+        }
+        
+        // Show notification
+        function showNotification(title, message, type = "success") {
+            notificationTitleElement.textContent = title;
+            notificationMessageElement.textContent = message;
+            
+            // Set notification type
+            notificationElement.className = "notification";
+            notificationElement.classList.add(type);
+            
+            // Show notification
+            notificationElement.classList.add('show');
+            
+            // Hide after 4 seconds
+            setTimeout(() => {
+                notificationElement.classList.remove('show');
+            }, 4000);
+        }
+        
+        // Show level up animation
+        function showLevelUp() {
+            levelUpAnimationElement.classList.add('show');
+        }
+        
+        // Save progress to localStorage
+        function saveProgress() {
+            const progress = {
+                level: gameState.level,
+                xp: gameState.xp,
+                nextLevelXp: gameState.nextLevelXp,
+                stamina: gameState.stamina,
+                strength: gameState.strength,
+                health: gameState.health,
+                completedTasks: gameState.completedTasks,
+                tasks: dailyTasks
+            };
+            
+            localStorage.setItem('soloLevelingProgress', JSON.stringify(progress));
+        }
+        
+        // Load progress from localStorage
+        function loadSavedProgress() {
+            const saved = localStorage.getItem('soloLevelingProgress');
+            
+            if (saved) {
+                try {
+                    const progress = JSON.parse(saved);
+                    
+                    gameState.level = progress.level || gameState.level;
+                    gameState.xp = progress.xp || gameState.xp;
+                    gameState.nextLevelXp = progress.nextLevelXp || gameState.nextLevelXp;
+                    gameState.stamina = progress.stamina || gameState.stamina;
+                    gameState.strength = progress.strength || gameState.strength;
+                    gameState.health = progress.health || gameState.health;
+                    gameState.completedTasks = progress.completedTasks || gameState.completedTasks;
+                    
+                    // Load tasks if available
+                    if (progress.tasks) {
+                        for (const category in progress.tasks) {
+                            if (dailyTasks[category]) {
+                                progress.tasks[category].forEach(savedTask => {
+                                    const task = dailyTasks[category].find(t => t.id === savedTask.id);
+                                    if (task) {
+                                        task.completed = savedTask.completed || false;
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    
+                    updateStatsDisplay();
+                    renderTasks();
+                    
+                    showNotification("Progress Loaded", "Welcome back to your journey!", "success");
+                } catch (e) {
+                    console.error("Error loading saved progress:", e);
+                }
+            }
+        }
+        
+        // Event Listeners
+        submitTasksButton.addEventListener('click', submitDailyTasks);
+        
+        resetDayButton.addEventListener('click', () => {
+            if (confirm("Are you sure you want to reset today's progress? This cannot be undone.")) {
+                resetTasksForNewDay();
+                showNotification("Day Reset", "All tasks have been reset for a fresh start.", "warning");
+            }
+        });
+        
+        closeLevelUpButton.addEventListener('click', () => {
+            levelUpAnimationElement.classList.remove('show');
+            showNotification("Level Up Complete", `You are now level ${gameState.level}!`, "success");
+        });
+        
+        acceptPunishmentButton.addEventListener('click', () => {
+            punishmentAnimationElement.classList.remove('show');
+            resetTasksForNewDay();
+            showNotification("Punishment Accepted", "Start fresh tomorrow with better discipline.", "danger");
+        });
+        
+        // Initialize the game
+        initGame();
+        
+        // Show welcome message
+        setTimeout(() => {
+            showNotification("System Activated", "Complete your daily tasks to level up your stats!", "success");
+        }, 1000);
+    </script>
+</body>
+</html>
